@@ -75,7 +75,7 @@ void debug_init()
    // sceNetConnect(debug_sockfd, (struct sockaddr *)&server, sizeof(server));
    
 
-   tmpdbgbuffer = malloc(65536);
+   tmpdbgbuffer = malloc(1e+7);
    strcpy(tmpdbgbuffer,"\n");
 
     char* usb_mnt_path = getusbpath();
@@ -119,6 +119,7 @@ void debug_close()
 void _dputs(const char *msg)
 {
    //sceNetSend(debug_sockfd, msg, strlen(msg), 0);
+   
    strcat(tmpdbgbuffer, msg);
 }
 
@@ -133,7 +134,6 @@ void _kdputs(const char *msg)
    // sys_write(curthread(), &uap);
 
 	strcat(tmpdbgbuffer, msg);
-	
 }
 
 void _hexdump(char *desc, void *addr, int len, int kernel) {
